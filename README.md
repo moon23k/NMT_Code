@@ -1,34 +1,47 @@
-# NLG_BERT
+## NMT Code
+&nbsp; **Code Translation** refers to the task of translating a user's natural language requests into the corresponding programming language. 
+In this repo, we aim to compare the performance of three different modeling approaches for Code Translation. 
+We will assess the strengths and limitations of each modeling method, shedding light on the quality and efficiency of code translation. 
+Our goal is to gain insights into which model is most effective in the field of code translation.
 
-This repo Implements [Incorporating BERT into Neural Machine Translation](https://arxiv.org/pdf/2002.06823.pdf) paper.
-The paper only covers NMT Task, but in this repo Dialogue Gerneration Task has added up.
-
-Currently Pretrained Large Models are prevailing in various NLP Tasks. However unfortunately, there are relatively little research on how to incorporate it into natural language generation.
-
-**Incorporating BERT into Neural Machine Translation** presents one way to apply pre-trained model to a Natural Language Generation Task.
-
-
-<br>
-<br>
+<br><br> 
 
 
-## Architecture
+## Model Desc
 
+**Transformer** <br> 
 
 <br>
-<br>
 
-## Training Setup
-
+**PLM Fusion** <br> 
 
 <br>
-<br>
+
+**PEFT**
+
+<br><br> 
+
+
+## Setup
+|Data setup| Model Setup | Training Setup |
+|---|---|---|
+| - | - | - |
+
+<br><br>
 
 ## Results
 
-<br>
-<br>
+| Model | BLEU Score | CodeBERT Score |
+|---|---|---|
+| Transformer | - | - |
+| PLM Fusion  | - | - |
+| PEFT        | - | - |
+
+<br><br> 
 
 ## References
-
+* [**Attention Is All You Need**]()
+* [**Incorporating BERT into Neural Machine Translation**](https://arxiv.org/abs/2002.06823)
+* [**PEFT**]()
+* [**CodeBERTScore: Evaluating Code Generation with Pretrained Models of Code**](https://arxiv.org/pdf/2302.05527.pdf)
 <br>
