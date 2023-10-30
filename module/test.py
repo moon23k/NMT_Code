@@ -10,7 +10,6 @@ class Tester:
         self.tokenizer = tokenizer
         self.dataloader = test_dataloader
         
-        self.path = config.path
         self.pad_id = config.pad_id
         self.bos_id = config.bos_id
         self.device = config.device

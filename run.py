@@ -105,7 +105,7 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     assert args.mode in ['train', 'test', 'inference']
-    assert args.model in ['transformer', 'plm_fusion']
+    assert args.model in ['transformer', 'plm_fusion', 'peft']
     assert args.search in ['beam', 'greedy']
     
     main(args)
