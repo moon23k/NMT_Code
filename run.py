@@ -2,30 +2,18 @@ import os, yaml, argparse, torch
 
 from tokenizers import Tokenizer
 from tokenizers.processors import TemplateProcessing
+from transformers import (
+    set_seed, 
+    RobertaTokenizer, 
+    T5ForConditionalGeneration
+)
 
 from module import (
     load_dataloader,
     load_model,
     Trainer, 
-    Tester, 
-    Generator
+    Tester
 )
-
-
-
-
-def set_seed(SEED=42):
-    import random
-    import numpy as np
-    import torch.backends.cudnn as cudnn
-
-    random.seed(SEED)
-    np.random.seed(SEED)
-    torch.manual_seed(SEED)
-    torch.cuda.manual_seed(SEED)
-    torch.cuda.manual_seed_all(SEED)
-    cudnn.benchmark = False
-    cudnn.deterministic = True
 
 
 
@@ -39,10 +27,11 @@ class Config(object):
                 for key, val in params[group].items():
                     setattr(self, key, val)
 
-
         self.mode = args.mode
         self.search_method = args.search
         self.model_type = args.model_type
+        self.mname = 'Salesforce/codet5-base'
+
         self.tokenizer_path = "data/tokenizer.json"
         self.ckpt = f"ckpt/{self.model_type}_model.pt"
 
@@ -72,13 +61,16 @@ def load_tokenizer(config):
     return tokenizer
 
 
+def inference():
+    return
+
 
 def main(config):
-    set_seed()
+    set_seed(42)
     config = Config(args)
-    model = load_model(config)
-    tokenizer = load_tokenizer(config)
 
+    tokenizer = RobertaTokenizer.from_pretrained(config.mname)
+    model = T5ForConditionalGeneration.from_pretrained(config.mname, model_max_length=config.max_len)
 
     if config.mode == 'train':
         train_dataloader = load_dataloader(config, tokenizer, 'train')
@@ -92,20 +84,15 @@ def main(config):
         tester.test()
         
     elif config.mode == 'inference':
-        generator = Generator(config, model, tokenizer)
-        generator.inference()
+        inference()
 
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-mode', required=True)
-    parser.add_argument('-model', required=True)
-    parser.add_argument('-search', required=True)
     
     args = parser.parse_args()
     assert args.mode in ['train', 'test', 'inference']
-    assert args.model in ['transformer', 'plm_fusion', 'peft']
-    assert args.search in ['beam', 'greedy']
     
     main(args)
